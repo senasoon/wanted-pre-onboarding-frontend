@@ -1,0 +1,36 @@
+$white: #ffffff;
+$black: #000000;
+$light-gray: #f1f1f1;
+$dark-gray: #b2b2b2;
+$primary-color: #6cfb5c;
+$secondary-color: #e2efe2;
+
+@mixin font-heading {
+  font-family: Pretendard;
+  font-weight: Bold;
+  font-size: 20px;
+}
+
+@mixin font-label {
+  font-family: Pretendard;
+  font-weight: 200;
+  font-size: 14px;
+}
+
+@mixin font-buttonM {
+  font-family: Pretendard;
+  font-weight: Bold;
+  font-size: 16px;
+}
+
+@mixin font-buttonS {
+  font-family: Pretendard;
+  font-weight: Bold;
+  font-size: 12px;
+}
+
+@mixin font-todo {
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 12px;
+}
