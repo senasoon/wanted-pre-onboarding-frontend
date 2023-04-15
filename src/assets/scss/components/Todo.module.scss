@@ -1,0 +1,55 @@
+@use '../abstracts' as *;
+
+.heading1 {
+  @include heading1;
+}
+
+.todoInput {
+  width: 230px;
+  margin-right: 4px;
+  border: 0;
+  border-bottom: 2px solid $black;
+  &:focus {
+    outline: 0;
+    border-bottom: 2px solid $primary-color;
+  }
+}
+
+.button {
+  @include buttonS(false);
+  &:hover {
+    @include buttonS(true);
+  }
+}
+
+.checkBox {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todoItem {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.editInput {
+  width: 180px;
+  height: 30px;
+  border: 0;
+  border-bottom: 2px solid $black;
+  &:focus {
+    outline: 0;
+    border-bottom: 2px solid $primary-color;
+  }
+}

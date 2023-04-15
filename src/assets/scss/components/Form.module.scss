@@ -1,0 +1,39 @@
+@use '../abstracts' as *;
+
+.heading1 {
+  @include heading1;
+}
+
+.form {
+  @include form;
+}
+
+.disabledButton {
+  @include colorButton(false);
+}
+
+.activeButton {
+  @include colorButton(true);
+}
+
+.whiteButton {
+  @include whiteButton;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  @include font-label;
+}
+
+.input {
+  border: 0;
+  background-color: $light-gray;
+  width: 318px;
+  height: 40px;
+  border-radius: 4px;
+  margin-top: 8px;
+}

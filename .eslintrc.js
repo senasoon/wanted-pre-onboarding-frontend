@@ -20,7 +20,7 @@ module.exports = {
     'react/display-name': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-var-requires': 0,
-    '@typescript-eslint/no-unused-vars': ['error'],
+    '@typescript-eslint/no-unused-vars': ['warn'],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
   settings: {
