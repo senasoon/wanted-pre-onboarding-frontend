@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import styles from '../../assets/scss/components/Todo.module.scss';
+import { Todo } from '../../types/todo';
 
-const TodoItem = () => {
+const TodoItem = ({ id, todo, isCompleted, userId }: Todo) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const toggleEditHandler = () => {
@@ -14,9 +15,9 @@ const TodoItem = () => {
         <>
           <div>
             <label>
-              <input className={styles.checkBox} type="checkbox" />
+              <input className={styles.checkBox} type="checkbox" checked={isCompleted} />
             </label>
-            <span>할일</span>
+            <span>{todo}</span>
           </div>
           <div>
             <button className={styles.button} data-testid="modify-button" onClick={toggleEditHandler}>

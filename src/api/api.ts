@@ -9,3 +9,11 @@ export const signIn = ({ email, password }: Auth) => {
 export const signUp = ({ email, password }: Auth) => {
   api.post('/auth/signup', { email, password });
 };
+
+export const getTodos = () => api.get('/todos');
+
+api.interceptors.request.use(function (config) {
+  const token = localStorage.getItem('access_token');
+  config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
