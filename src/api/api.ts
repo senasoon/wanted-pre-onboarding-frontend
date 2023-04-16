@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Auth } from '../types/auth';
+import { Todo } from '../types/todo';
 
 const api = axios.create({ baseURL: process.env.REACT_APP_BASE_URL });
 
@@ -11,6 +12,9 @@ export const signUp = ({ email, password }: Auth) => {
 };
 
 export const getTodos = () => api.get('/todos');
+export const createTodo = ({ todo }: { todo: string }) => {
+  return api.post('/todos', { todo });
+};
 
 api.interceptors.request.use(function (config) {
   const token = localStorage.getItem('access_token');

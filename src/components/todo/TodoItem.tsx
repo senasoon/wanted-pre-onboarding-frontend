@@ -15,7 +15,7 @@ const TodoItem = ({ id, todo, isCompleted, userId }: Todo) => {
         <>
           <div>
             <label>
-              <input className={styles.checkBox} type="checkbox" checked={isCompleted} />
+              <input className={styles.checkBox} type="checkbox" defaultChecked={isCompleted} />
             </label>
             <span>{todo}</span>
           </div>
