@@ -6,6 +6,9 @@ interface FormInputProps {
   testId: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  type?: string;
+  autoComplete?: string;
 }
 
 const FormInput = ({ labelText, id, testId, ...restProps }: FormInputProps) => {

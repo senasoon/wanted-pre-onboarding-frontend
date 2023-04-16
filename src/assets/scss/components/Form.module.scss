@@ -36,4 +36,8 @@
   height: 40px;
   border-radius: 4px;
   margin-top: 8px;
+  padding: 0 10px;
+  &::placeholder {
+    color: $dark-gray;
+  }
 }
