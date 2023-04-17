@@ -28,8 +28,8 @@ const SignInPage = () => {
       const { data } = await signIn({ email, password });
       localStorage.setItem('access_token', data['access_token']);
       navigate('/todo');
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      throw new Error((error as Error).message);
     }
   };
 

@@ -25,10 +25,10 @@ const SignUpPage = () => {
     e.preventDefault();
     try {
       await signUp({ email, password });
-      alert('회원가입이 완료되었습니다.');
+      await alert('회원가입이 완료되었습니다.');
       navigate('/signin');
-    } catch (error) {
-      console.log(error);
+    } catch (error: unknown) {
+      throw new Error((error as Error).message);
     }
   };
 
