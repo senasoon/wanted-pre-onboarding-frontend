@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
-  const { value: email, setValue: setEmail, onChange: emailChangeHandler } = useInput('');
-  const { value: password, setValue: setPassword, onChange: passwordChangeHandler } = useInput('');
+  const { value: email, onChange: emailChangeHandler } = useInput('');
+  const { value: password, onChange: passwordChangeHandler } = useInput('');
 
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);

@@ -11,7 +11,6 @@ const TodoItem = ({
   id,
   todo: todoProps,
   isCompleted: isCompletedProps,
-  userId,
   deleteTodoHandler,
   updateTodoHandler,
 }: TodoItemProps) => {
