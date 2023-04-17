@@ -30,7 +30,7 @@ const TodoList = () => {
   }, []);
 
   return (
-    <>
+    <main className={styles.todoList}>
       <h1 className={styles.heading1}>TODO LIST</h1>
       <form onSubmit={createTodoHandler}>
         <label>
@@ -45,7 +45,7 @@ const TodoList = () => {
           <TodoItem key={todo.id} {...todo} />
         ))}
       </ul>
-    </>
+    </main>
   );
 };
 

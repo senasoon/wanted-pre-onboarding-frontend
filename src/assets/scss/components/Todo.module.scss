@@ -4,8 +4,19 @@
   @include heading1;
 }
 
+.todoList {
+  width: 318px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  ul {
+    padding: 0;
+  }
+}
+
 .todoInput {
-  width: 230px;
+  width: 265px;
   margin-right: 4px;
   border: 0;
   border-bottom: 2px solid $black;
@@ -32,6 +43,7 @@
 
 .todoItem {
   height: 30px;
+  width: 318px;
   display: flex;
   justify-content: space-between;
   align-items: center;
