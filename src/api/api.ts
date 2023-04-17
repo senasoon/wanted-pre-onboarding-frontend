@@ -15,6 +15,9 @@ export const getTodos = () => api.get('/todos');
 export const createTodo = ({ todo }: { todo: string }) => {
   return api.post('/todos', { todo });
 };
+export const updateTodo = ({ todo, isCompleted, id }: { todo: string; isCompleted: boolean; id: number }) => {
+  return api.put(`todos/${id}`, { todo, isCompleted });
+};
 
 api.interceptors.request.use(function (config) {
   const token = localStorage.getItem('access_token');
