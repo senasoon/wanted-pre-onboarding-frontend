@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createTodo, getTodos } from '../../api/api';
+import { createTodo, getTodos, deleteTodo, updateTodo } from '../../api/api';
 import TodoItem from './TodoItem';
 import { Todo } from '../../types/todo';
 import styles from '../../assets/scss/components/Todo.module.scss';
@@ -25,6 +25,28 @@ const TodoList = () => {
     }
   };
 
+  const updateTodoHandler = async ({ todo, isCompleted, id }: Todo) => {
+    try {
+      const { data } = await updateTodo({ todo, isCompleted, id });
+      setTodos((todos) =>
+        todos.map((todoItem) =>
+          todoItem.id === id ? { ...todoItem, todo: data.todo, isCompleted: data.isCompleted } : todoItem,
+        ),
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteTodoHandler = async (id: number) => {
+    try {
+      await deleteTodo({ id });
+      setTodos((todos) => todos.filter((todo) => todo.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getTodosHandler();
   }, []);
@@ -42,7 +64,12 @@ const TodoList = () => {
       </form>
       <ul>
         {todos?.map((todo) => (
-          <TodoItem key={todo.id} {...todo} />
+          <TodoItem
+            key={todo.id}
+            {...todo}
+            deleteTodoHandler={deleteTodoHandler}
+            updateTodoHandler={updateTodoHandler}
+          />
         ))}
       </ul>
     </main>
