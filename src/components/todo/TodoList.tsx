@@ -4,6 +4,7 @@ import TodoItem from './TodoItem';
 import { Todo } from '../../types/todo';
 import styles from '../../assets/scss/components/Todo.module.scss';
 import useInput from '../../hooks/useInput';
+import { CustomError } from '../../types/error';
 
 const TodoList = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -20,8 +21,8 @@ const TodoList = () => {
       const { data } = await createTodo({ todo });
       setTodos([...todos, data]);
       setTodo('');
-    } catch (error: any) {
-      alert(error.response.data.message ?? error.message);
+    } catch (error: unknown) {
+      alert((error as CustomError)?.response?.data.message ?? (error as Error).message);
     }
   };
 
@@ -33,8 +34,8 @@ const TodoList = () => {
           todoItem.id === id ? { ...todoItem, todo: data.todo, isCompleted: data.isCompleted } : todoItem,
         ),
       );
-    } catch (error: any) {
-      alert(error.response.data.message ?? error.message);
+    } catch (error: unknown) {
+      alert((error as CustomError)?.response?.data.message ?? (error as Error).message);
     }
   };
 
@@ -42,8 +43,8 @@ const TodoList = () => {
     try {
       await deleteTodo({ id });
       setTodos((todos) => todos.filter((todo) => todo.id !== id));
-    } catch (error: any) {
-      alert(error.response.data.message ?? error.message);
+    } catch (error: unknown) {
+      alert((error as CustomError)?.response?.data.message ?? (error as Error).message);
     }
   };
 

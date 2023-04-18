@@ -4,6 +4,7 @@ import useInput from '../hooks/useInput';
 import styles from '../assets/scss/components/Form.module.scss';
 import { useEffect, useState } from 'react';
 import { signIn } from '../api/api';
+import { CustomError } from '../types/error';
 
 interface SignInPageProps {
   updateIsAuthenticated: () => void;
@@ -33,8 +34,8 @@ const SignInPage = ({ updateIsAuthenticated }: SignInPageProps) => {
       localStorage.setItem('access_token', data['access_token']);
       updateIsAuthenticated();
       navigate('/todo');
-    } catch (error: any) {
-      alert(error.response.data.message ?? error.message);
+    } catch (error: unknown) {
+      alert((error as CustomError)?.response?.data.message ?? (error as Error).message);
     }
   };
 

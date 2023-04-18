@@ -4,6 +4,7 @@ import styles from '../assets/scss/components/Form.module.scss';
 import { useEffect, useState } from 'react';
 import { signUp } from '../api/api';
 import { useNavigate } from 'react-router-dom';
+import { CustomError } from '../types/error';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -27,8 +28,8 @@ const SignUpPage = () => {
       await signUp({ email, password });
       alert('회원가입이 완료되었습니다.');
       navigate('/signin');
-    } catch (error: any) {
-      alert(error.response.data.message ?? error.message);
+    } catch (error: unknown) {
+      alert((error as CustomError)?.response?.data.message ?? (error as Error).message);
     }
   };
 
