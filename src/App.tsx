@@ -4,6 +4,7 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import Layout from './pages/Layout';
 import NotFound from './pages/NotFound';
+import { useState } from 'react';
 
 interface PrivateRouteProps {
   isAuthenticated: string | null;
@@ -14,14 +15,27 @@ const PrivateRoute = ({ isAuthenticated }: PrivateRouteProps) => {
 };
 
 const App = () => {
-  const isAuthenticated = localStorage.getItem('access_token');
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('access_token'));
+
+  const updateIsAuthenticated = () => {
+    setIsAuthenticated(localStorage.getItem('access_token'));
+  };
 
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Navigate to="/todo" replace={true} />} />
-          <Route path="/signin" element={isAuthenticated ? <Navigate to="/todo" replace={true} /> : <SignInPage />} />
+          <Route
+            path="/signin"
+            element={
+              isAuthenticated ? (
+                <Navigate to="/todo" replace={true} />
+              ) : (
+                <SignInPage updateIsAuthenticated={updateIsAuthenticated} />
+              )
+            }
+          />
           <Route path="/signup" element={isAuthenticated ? <Navigate to="/todo" replace={true} /> : <SignUpPage />} />
           <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
             <Route path="/todo" element={<MainPage />} />

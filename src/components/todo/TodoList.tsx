@@ -20,8 +20,8 @@ const TodoList = () => {
       const { data } = await createTodo({ todo });
       setTodos([...todos, data]);
       setTodo('');
-    } catch (error: unknown) {
-      throw new Error((error as Error).message);
+    } catch (error: any) {
+      alert(error.response.data.message ?? error.message);
     }
   };
 
@@ -33,8 +33,8 @@ const TodoList = () => {
           todoItem.id === id ? { ...todoItem, todo: data.todo, isCompleted: data.isCompleted } : todoItem,
         ),
       );
-    } catch (error: unknown) {
-      throw new Error((error as Error).message);
+    } catch (error: any) {
+      alert(error.response.data.message ?? error.message);
     }
   };
 
@@ -42,8 +42,8 @@ const TodoList = () => {
     try {
       await deleteTodo({ id });
       setTodos((todos) => todos.filter((todo) => todo.id !== id));
-    } catch (error: unknown) {
-      throw new Error((error as Error).message);
+    } catch (error: any) {
+      alert(error.response.data.message ?? error.message);
     }
   };
 

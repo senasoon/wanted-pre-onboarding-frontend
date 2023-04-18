@@ -5,7 +5,11 @@ import styles from '../assets/scss/components/Form.module.scss';
 import { useEffect, useState } from 'react';
 import { signIn } from '../api/api';
 
-const SignInPage = () => {
+interface SignInPageProps {
+  updateIsAuthenticated: () => void;
+}
+
+const SignInPage = ({ updateIsAuthenticated }: SignInPageProps) => {
   const navigate = useNavigate();
 
   const { value: email, onChange: emailChangeHandler } = useInput('');
@@ -27,9 +31,10 @@ const SignInPage = () => {
     try {
       const { data } = await signIn({ email, password });
       localStorage.setItem('access_token', data['access_token']);
+      updateIsAuthenticated();
       navigate('/todo');
-    } catch (error: unknown) {
-      throw new Error((error as Error).message);
+    } catch (error: any) {
+      alert(error.response.data.message ?? error.message);
     }
   };
 

@@ -8,7 +8,7 @@ export const signIn = ({ email, password }: Auth) => {
   return api.post('/auth/signin', { email, password });
 };
 export const signUp = ({ email, password }: Auth) => {
-  api.post('/auth/signup', { email, password });
+  return api.post('/auth/signup', { email, password });
 };
 
 export const getTodos = () => api.get('/todos');
