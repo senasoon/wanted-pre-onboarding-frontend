@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import styles from '../../assets/scss/components/Todo.module.scss';
 import { Todo } from '../../types/todo';
 
@@ -7,17 +7,9 @@ interface TodoItemProps extends Todo {
   updateTodoHandler: ({ id, todo, isCompleted }: Todo) => void;
 }
 
-const TodoItem = ({
-  id,
-  todo: todoProps,
-  isCompleted: isCompletedProps,
-  deleteTodoHandler,
-  updateTodoHandler,
-}: TodoItemProps) => {
+const TodoItem = ({ id, todo, isCompleted, deleteTodoHandler, updateTodoHandler }: TodoItemProps) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(isCompletedProps);
-  const [todo, setTodo] = useState(todoProps);
-  const [newTodo, setNewTodo] = useState(todoProps);
+  const [newTodo, setNewTodo] = useState(todo);
 
   const todoChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTodo(e.target.value);
@@ -26,18 +18,6 @@ const TodoItem = ({
   const toggleEditHandler = () => {
     setIsEdit((prev) => !prev);
   };
-
-  const didMount = useRef(false);
-
-  useEffect(() => {
-    if (didMount.current) updateTodoHandler({ id, todo, isCompleted });
-    else didMount.current = true;
-  }, [isCompleted]);
-
-  useEffect(() => {
-    setTodo(todoProps);
-    setNewTodo(todoProps);
-  }, [todoProps]);
 
   return (
     <li className={styles.todoItem}>
@@ -49,8 +29,7 @@ const TodoItem = ({
                 className={styles.checkBox}
                 type="checkbox"
                 defaultChecked={isCompleted}
-                onChange={todoChangeHandler}
-                onClick={() => setIsCompleted((prev) => !prev)}
+                onChange={() => updateTodoHandler({ id, todo, isCompleted: !isCompleted })}
               />
             </label>
             <span>{todo}</span>
@@ -77,7 +56,7 @@ const TodoItem = ({
             <input
               className={styles.editInput}
               data-testid="modify-input"
-              value={newTodo}
+              defaultValue={todo}
               onChange={todoChangeHandler}
             />
           </label>
@@ -91,14 +70,7 @@ const TodoItem = ({
           >
             제출
           </button>
-          <button
-            className={styles.button}
-            data-testid="cancel-button"
-            onClick={() => {
-              setNewTodo(todo);
-              toggleEditHandler();
-            }}
-          >
+          <button className={styles.button} data-testid="cancel-button" onClick={toggleEditHandler}>
             취소
           </button>
         </>

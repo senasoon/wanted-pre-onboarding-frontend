@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createTodo, getTodos, deleteTodo, updateTodo } from '../../api/api';
+import { createTodo, getTodos, deleteTodo, updateTodo } from '../../api/todo';
 import TodoItem from './TodoItem';
 import { Todo } from '../../types/todo';
 import styles from '../../assets/scss/components/Todo.module.scss';

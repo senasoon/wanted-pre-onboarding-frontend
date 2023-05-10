@@ -1,26 +1,17 @@
 import FormInput from '../components/form/FormInput';
 import useInput from '../hooks/useInput';
 import styles from '../assets/scss/components/Form.module.scss';
-import { useEffect, useState } from 'react';
-import { signUp } from '../api/api';
 import { useNavigate } from 'react-router-dom';
 import { CustomError } from '../types/error';
+import { signUp } from '../api/auth';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   const { value: email, onChange: emailChangeHandler } = useInput('');
   const { value: password, onChange: passwordChangeHandler } = useInput('');
 
-  const [isValidEmail, setIsValidEmail] = useState(false);
-  const [isValidPassword, setIsValidPassword] = useState(false);
-
-  useEffect(() => {
-    email.includes('@') && email.includes('.') ? setIsValidEmail(true) : setIsValidEmail(false);
-  }, [email]);
-
-  useEffect(() => {
-    password.length >= 8 ? setIsValidPassword(true) : setIsValidPassword(false);
-  }, [password]);
+  const isValidEmail = email.includes('@');
+  const isValidPassword = password.length >= 8;
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
